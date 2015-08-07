@@ -146,6 +146,7 @@ void importDimacs(char * name,Formula * f){
 	int nbClauses;
 	str2int(word,&nbClauses);
 	createFormula(f,nbVariables);
+	assert(f->clauses==NULL);
 	int value=0;
 		
 	Clause *clause;
@@ -170,20 +171,24 @@ void importDimacs(char * name,Formula * f){
 	free(word);	
 
 }
-void exportDimacs(char *name,Formula *f){/*
+void exportDimacs(char *name,Formula *f){
 		FILE * file=NULL;
 		file=fopen(name,"w");
 		if(file==NULL)exit(1);
+		node *p=f->clauses;
 		fprintf(file,"p cnf %d %d \n",f->nbVariables,f->nbClauses);
 		
-		for(int i=0;i<f->nbClauses;i++){
-		for(int j=0;j<f->clauses[i].size;j++){
-			fprintf(file,"%d ",f->clauses[i].datas[j]);
+		while(p!=NULL){
+		for(int i=0;i<p->clause->size;i++){
+			fprintf(file,"%d ",p->clause->datas[i]);
 		}
 		fprintf(file,"\n");
+		assert(p!=p->next);
+		p=p->next;
 	}
+	fclose(file);
 	
-*/}
+}
 // malloc n and initilaize  clause,next to NULL
 // n can't be NULL
 void createEmptyNode(node ** n ){
@@ -204,8 +209,11 @@ void addClause(Formula * f, Clause * c){
 	if(c==NULL)return ;
 	node * n;
 	creatNode(&n,c);
-	assert(n!=NULL);
+
 	n->next=f->clauses;
+	if(f->clauses==NULL){
+		printf("hi");
+	}
 	f->clauses=n;
 	f->nbClauses++;
 
