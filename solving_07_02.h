@@ -2,7 +2,7 @@
 #define SOLVING_07_02_H
 #include"vecInt.h"
 #include"solving_07_01.h"
-
+#include"stdio.h"
 
 #define DEFAULTSIZE 20
 // Typedef usefull for readbility
@@ -20,6 +20,7 @@ typedef struct {
   int nbVariables;
   node * clauses;
   node ** literalOccurrences;
+  node * tail;
 } Formula;
 
 
@@ -63,4 +64,5 @@ void creatEmptyNode(node ** n);
 void freeNode(node * n);
 void freeList(node * head);
 void freeOccurances(node * head);
+void skipLine(FILE *f);
 #endif

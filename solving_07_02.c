@@ -56,6 +56,7 @@ void createFormula(Formula *f,int nbVariables) {
    f->nbClauses = 0;
    f->nbVariables = nbVariables;
    f->clauses = NULL; // head of linked list 
+   f->tail=NULL;
    f->literalOccurrences=(Occurrences **) malloc(sizeof(Occurrences*)*nbVariables*2); 
    
 
@@ -182,7 +183,7 @@ void exportDimacs(char *name,Formula *f){
 		for(int i=0;i<p->clause->size;i++){
 			fprintf(file,"%d ",p->clause->datas[i]);
 		}
-		fprintf(file,"\n");
+		fprintf(file,"0\n");
 		assert(p!=p->next);
 		p=p->next;
 	}
@@ -209,15 +210,23 @@ void addClause(Formula * f, Clause * c){
 	if(c==NULL)return ;
 	node * n;
 	creatNode(&n,c);
-
-	n->next=f->clauses;
+	if(f->clauses==NULL){
+		f->tail=n;
+		f->clauses=f->tail;
+		f->nbClauses++;
+		return;
+	}
+	f->tail->next=n;
+	f->tail=f->tail->next;
+	assert(f->tail->next==NULL);	
+	/*n->next=f->clauses;
 	if(f->clauses==NULL){
 		printf("hi");
 	}
-	f->clauses=n;
+	f->clauses=n;*/
 	f->nbClauses++;
 
-	assert(f->clauses==n);
+	// assert(f->clauses==n);
 
 }
 // addclause to the literal linked list
