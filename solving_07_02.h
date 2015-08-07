@@ -29,7 +29,7 @@ typedef struct {
  * @param nbClauses
  * @param nbVariables
  */
-void createFormula(Formula *f,int nbClauses,int nbVariables);
+void createFormula(Formula *f,int nbVariables);
 
 /*****************************************************
  * Free the dynamic memory allocation
@@ -47,7 +47,7 @@ void freeFormula(Formula *f);
  * @param clauseNumber (the position)
 
  */
-void createClause(Formula f,int clauseNumber);
+void createClause(Clause ** c);
 
 /*****************************************************
  * insert a literal l in a given clause
@@ -55,7 +55,7 @@ void createClause(Formula f,int clauseNumber);
  * @param clauseNumber (the position)
  * @param Literal l
  */
-void addLiteralInClause(Formula f,int clauseNumber, Literal l);
+void addLiteralInClause(Formula f,Clause * c, Literal l);
 void addClause(Formula f,Clause * c);
 void addOccurance(Formula f, Clause * c);
 void creatNode(node ** n,Clause * c);
