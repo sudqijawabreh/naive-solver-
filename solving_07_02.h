@@ -9,13 +9,18 @@
 typedef vecInt Clause;
 typedef vecInt Occurrences;
 typedef vecInt Occurrences;
+
+typedef struct node{
+	vecInt * clause;
+	struct node  * next;
+
+}node;
 typedef struct {
   int nbClauses;
   int nbVariables;
   Clause* clauses;
-  Occurrences* literalOccurrences;
+  node ** literalOccurrences;
 } Formula;
-
 
 
 /*****************************************************
@@ -51,6 +56,10 @@ void createClause(Formula f,int clauseNumber);
  * @param Literal l
  */
 void addLiteralInClause(Formula f,int clauseNumber, Literal l);
+void addClause(Formula f,Clause * c);
+void addOccurance(Formula f, Clause * c);
+void creatNode(node ** n,Clause * c);
+void creatEmptyNode(node ** n);
 
 
 #endif

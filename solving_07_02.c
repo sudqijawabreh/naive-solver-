@@ -52,31 +52,23 @@ int extractWord(FILE *f,char *buffer) {
 }
 
 
-void createFormula(Formula *f,int nbClauses,int nbVariables) {
-   f->nbClauses = nbClauses;
+void createFormula(Formula *f,int nbVariables) {
+   f->nbClauses = 0
    f->nbVariables = nbVariables;
-   f->clauses = (Clause*) malloc(sizeof(Clause)*nbClauses);
-   f->literalOccurrences=(Occurrences *) malloc(sizeof(Occurrences)*nbVariables*2);
+   f->clauses = NULL; // head of linked list 
+   f->literalOccurrences=(Occurrences **) malloc(sizeof(Occurrences*)*nbVariables*2); 
    
 
-   for(int i = 0;i<nbClauses;i++) 
-    createClause(*f,i);
     for (int i = 0; i < nbVariables*2; i++)
 	{
-		createEmptyVec(f->nbVariables*2,&(f->literalOccurrences[i]));
+		f->literalOccurrences[i]=NULL;
 	}
 	
 
 }
 
 void freeFormula(Formula *f) {
-  for(int i = 0;i<f->nbClauses;i++) 
-    freeVec(&(f->clauses[i]));
-  free(f->clauses);
  
-  for(int i = 0;i<f->nbVariables*2;i++) 
-    freeVec(&(f->literalOccurrences[i]));
-     free(f->literalOccurrences);
 }
 
 /*****************************************************
@@ -162,7 +154,34 @@ void exportDimacs(char *name,Formula *f){
 	}
 	
 }
+// malloc n and initilaize  clause,next to NULL
+// n can't be NULL
+void createEmptyNode(node ** n ){
+	*n=(node *)malloc(sizeof(node));
+	assert(*n!=NULL);
+	*(n)->clause=NULL;
+	*(n)->next=NULL;
+}
+// creat new Node and assigne clause 
+// c and n  can't be NULL
+void creatNode(node ** n,Clause * c){
+	createEmptyNode(n);
+	*(n)->clause=c;
+	
+}
+// add caluse to formula and increament # clauses 
+void addClause(Formula f, Clause * c){
+	if(c==NULL)return ;
+	node * n;
+	creatNode(&n,c);
+	assert(n!=NULL);
+	n->next=f.clauses;
+	f.clauses=n;
+	f.nbClauses++;
 
+	assert(f.caluses==n);
+
+}
 
 
 
