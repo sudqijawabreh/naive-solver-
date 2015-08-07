@@ -68,7 +68,7 @@ void createFormula(Formula *f,int nbVariables) {
 	
 
 }
-
+// free  clauses linked list and Occurances array of linked list
 void freeFormula(Formula *f) {
 	freeList(f->clauses);
 	f->clauses=NULL;
@@ -82,12 +82,14 @@ void freeFormula(Formula *f) {
 
 
 }
-
+// free the contante of a node 
+// as alwas n can't be NULL
 void freeNode(node * n){
 	freeVec(n->clause);
 	free(n->clause);
 }
-
+// free the Occurances nodes 
+// I used deffient function because I don't to free the node more than time :) 
 void freeOccurances(node * head){
 
 	if(head==NULL)return;
@@ -134,14 +136,15 @@ void importDimacs(char * name,Formula * f){
 	char * word=(char *)malloc(sizeof(char)*100);
 	char c;
 	extractWord(file,word);
+	// this part was designed to skip the comments in the begining 
+	// but it doesn't work yet :/ 
 	while(strcmp(word,"c")==0){
 		c=fgetc(file);
 		while(c!=13&& c!=10){c=fgetc(file);}
 		extractWord(file,word);
 	}
-	//while(stcmp(word,"p")==0){fgetc(file);}
-	extractWord(file,word);
-	extractWord(file,word);
+	extractWord(file,word);// read nbClauses
+	extractWord(file,word);// read nbVaraibles 
 	int nbVariables ;
 	str2int(word,&nbVariables);
 	extractWord(file,word);
@@ -150,7 +153,7 @@ void importDimacs(char * name,Formula * f){
 	createFormula(f,nbVariables);
 	assert(f->clauses==NULL);
 	int value=0;
-		
+	//creat clause read it is literals from file and add it to formual
 	Clause *clause;
 	for (int i = 0;i<nbClauses ; i++)
 	{		
@@ -173,6 +176,8 @@ void importDimacs(char * name,Formula * f){
 	free(word);	
 
 }
+// exporting the formula to a file as Dimac format
+
 void exportDimacs(char *name,Formula *f){
 		FILE * file=NULL;
 		file=fopen(name,"w");
@@ -246,6 +251,7 @@ void addOccurance(Formula f, Clause * c,Literal l){
 
 
 }
+// free the list then free the head recursivly 
 void freeList(node * head){
 	if(head==NULL)return;
 	assert(head!=head->next);

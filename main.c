@@ -9,7 +9,7 @@
 #include<stdio.h>
 #include"solving_01_04_modify.h"
 #include<time.h>
-
+// generate all possible Interpretations and check if the formula satisfiable
 int generateAndCheck(Formula f,Interpretation  v,int size){
 	if(size==0)return TRUE;
 	assert(size>0);
@@ -54,10 +54,10 @@ int  main(int argc, char const *argv[])
 	Formula f;
 	Interpretation I;
 	srand(clock());
-	createAndInitializeInterpretation(&I,20);
+	createAndInitializeInterpretation(&I,10);
 	// generateRandomComplete(I);
-	generateFullRandomFormula(&f,20,50);
-	printf("check %d\n",generateAndCheck(f,I,20));
+	generateFullRandomFormula(&f,10,50);
+	printf("check %d\n",generateAndCheck(f,I,10));
 	displayFormula(f,I);
 	printf("isSAT %d\n", isSatisfiedFormula(f,I));
 	node *p =f.clauses;

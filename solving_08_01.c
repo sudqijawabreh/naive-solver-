@@ -74,7 +74,7 @@ int isUnit(Clause c,Interpretation I){
 		if(value==UNDEF)printf("\033[22;34m%d ",c.datas[i]);
 		if(value==TRUE)printf("\033[22;32m %d ",c.datas[i]);
 	}
-	printf("\n");
+	printf("\033[01;37m\n");
 }
 /**
  * @param f the formula
