@@ -125,7 +125,7 @@ void addLiteralInClause(Formula f, Clause * c, Literal l) {
 }
 
 
-void importDimacs(char * name,Formula * f){/*
+void importDimacs(char * name,Formula * f){
 	FILE * file=NULL;
 	file=fopen(name,"r");
 	if(file==NULL)exit(1);
@@ -145,26 +145,31 @@ void importDimacs(char * name,Formula * f){/*
 	extractWord(file,word);
 	int nbClauses;
 	str2int(word,&nbClauses);
-	//createFormula(f,nbClauses,nbVariables);
+	createFormula(f,nbVariables);
 	int value=0;
-	
-	for (int i = 0;i<f->nbClauses ; i++)
-	{
+		
+	Clause *clause;
+	for (int i = 0;i<nbClauses ; i++)
+	{		
+		createClause(&clause);
+		addClause(f,clause);
 		extractWord(file,word);
 		while(1){
 			
 			
 			if(word[0]==EOF)return;
-			str2int(word,&value);
-			addLiteralInClause(*f,i,value);
 			if(word[0]=='0')break;
+			str2int(word,&value);
+			addLiteralInClause(*f,clause,value);
+			
 			extractWord(file,word);
 		}
 		 
 	}
-	
+	fclose(file);
+	free(word);	
 
-*/}
+}
 void exportDimacs(char *name,Formula *f){/*
 		FILE * file=NULL;
 		file=fopen(name,"w");
