@@ -15,9 +15,9 @@ int  main(int argc, char const *argv[])
 	createClause(&c);
 	addClause(&f,c);
 	addLiteralInClause(f,c,-1);
-
-	printf("%d\n",f.clauses->clause->datas[0] );
-	printf("%d\n",f.literalOccurrences[literalIdx(-1)]->clause->datas[0]);
-	
+	addLiteralInClause(f,c ,2);
+	printf("%d\n",f.clauses->clause->datas[1] );
+	printf("%d\n",f.literalOccurrences[literalIdx(2)]->clause->datas[1]);
+	freeFormula(&f);
 	return 0;
 }

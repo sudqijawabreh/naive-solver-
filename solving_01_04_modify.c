@@ -11,7 +11,7 @@
  * @param f the formula
  * @param clauseNumber : the clause to generate
  * @param : the number of literals that contain the clause
-
+	
  */
 void generateClause(Formula f,int clauseNumber, int nbLiterals) {/*
   for(int i = 0;i<nbLiterals;i++) {

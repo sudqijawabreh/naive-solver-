@@ -60,6 +60,7 @@ void addClause(Formula * f, Clause * c);
 void addOccurance(Formula f, Clause * c,Literal l);
 void creatNode(node ** n,Clause * c);
 void creatEmptyNode(node ** n);
-
-
+void freeNode(node * n);
+void freeList(node * head);
+void freeOccurances(node * head);
 #endif

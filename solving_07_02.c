@@ -68,9 +68,31 @@ void createFormula(Formula *f,int nbVariables) {
 }
 
 void freeFormula(Formula *f) {
- 
+	freeList(f->clauses);
+	f->clauses=NULL;
+	for (int i = 0; i <f->nbVariables*2; ++i)
+	{
+		freeOccurances(f->literalOccurrences[i]);
+	}
+	free(f->literalOccurrences);
+	f->literalOccurrences=NULL;
+	f->nbClauses=0;
+
+
 }
 
+void freeNode(node * n){
+	freeVec(n->clause);
+	free(n->clause);
+}
+
+void freeOccurances(node * head){
+
+	if(head==NULL)return;
+	freeOccurances(head->next);
+	free(head);
+
+}
 /*****************************************************
  * Create space for clause 
  * The default space allocated will be DEFAULTSIZE
@@ -201,7 +223,13 @@ void addOccurance(Formula f, Clause * c,Literal l){
 
 
 }
-
+void freeList(node * head){
+	if(head==NULL)return;
+	assert(head!=head->next);
+	freeList(head->next);
+	freeNode(head);
+	free(head);
+}
 
 
 
