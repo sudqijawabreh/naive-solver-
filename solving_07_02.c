@@ -78,9 +78,12 @@ void freeFormula(Formula *f) {
  * @param clauseNumber (the position)
 
  */
-void createClause(Formula f,int clauseNumber) {
-  assert(clauseNumber < f.nbClauses);
-  createEmptyVec(DEFAULTSIZE,&(f.clauses[clauseNumber]));
+ // creat Clause with type vecInt 
+ // c can't be NULL
+void createClause(Clause ** c) {
+	assert(c!=NULL);
+	createEmptyVec(DEFAULTSIZE,*c);
+  	assert(*c!=NULL);
 }
 
 /*****************************************************
@@ -89,14 +92,13 @@ void createClause(Formula f,int clauseNumber) {
  * @param clauseNumber (the position)
  * @param Literal l
  */
-void addLiteralInClause(Formula f,int clauseNumber, Literal l) {
-  assert(clauseNumber < f.nbClauses);
-  addLast(&(f.clauses[clauseNumber]),l);
-  int v=getVariable(l);
-  if(l>0)
-  addLast(&(f.literalOccurrences[2*(v-1)]),clauseNumber);
-  if(l<0)
-    addLast(&(f.literalOccurrences[2*(v-1)+1]),clauseNumber);
+ // add literal to caluse and caluse to literal occurances list
+ // c can't be NULL and l can't be zero 
+void addLiteralInClause(Formula f, Cluase * c, Literal l) {
+	assert(l!=0);
+	assert(c!=NULL);
+  	addLast(c,l);
+  	addOccurance(f,c,l);
 }
 
 
@@ -180,6 +182,22 @@ void addClause(Formula f, Clause * c){
 	f.nbClauses++;
 
 	assert(f.caluses==n);
+
+}
+// addclause to the literal linked list
+// clause can't be NULL
+// l can't be 0 
+void addOccurance(Formula f, Clause * c,Literal l){
+	assert(c!=NULL);
+	assert(l!=0);
+	f.literalOccurrences[literalIdx(l)];
+	node * n;
+	creatNode(&n,c);
+	assert(n!=NULL);
+	n->next=f.literalOccurrences[literalIdx(l)];
+	f.literalOccurrences[literalIdx(l)]=n;
+	assert(f.literalOccurrences[literalIdx(l)]==n);
+
 
 }
 
