@@ -59,8 +59,8 @@ int  main(int argc, char const *argv[])
 	generateFullRandomFormula(&f,10,50);
 	printf("check %d\n",generateAndCheck(f,I,10));
 	displayFormula(f,I);
-	printf("isSAT %d\n", isSatisfiedFormula(f,I));
-	node *p =f.clauses;
+	printf("isSAT %d\n", isSatisfiedFormula(f,I));//check if the solution true 
+	// node *p =f.clauses;
 	/*while(p!=NULL){
 		for (int i = 0; i < p->clause->size; ++i)
 		{
