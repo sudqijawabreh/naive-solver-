@@ -19,7 +19,7 @@
  * @return a pointer on all occurences of the literal l in the formula f
  *
  */
-vecInt* getOccurrences(Formula f, Literal l);
+node * getOccurrences(Formula f, Literal l);
 
 
 

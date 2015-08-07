@@ -13,7 +13,7 @@
  * @return a pointer on all occurences of the literal l in the formula f
  */
 
-vecInt* getOccurrences(Formula f, Literal l) {
+node * getOccurrences(Formula f, Literal l) {
 	/*vecInt * occ=(vecInt *)malloc(sizeof(vecInt));
 	createEmptyVec(f.nbVariables,occ);
 	for (int i = 0; i <f.nbClauses ; i++)
@@ -28,7 +28,7 @@ vecInt* getOccurrences(Formula f, Literal l) {
 	return &f.literalOccurrences[2*(v-1)];
 	if(l<0)
 	return &f.literalOccurrences[2*(v-1)+1];*/
-	//return f.literalOccurrences[literalIdx(l)]);
+	return f.literalOccurrences[literalIdx(l)];
 	
 }
 
