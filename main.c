@@ -82,5 +82,6 @@ int  main(int argc, char const *argv[])
 */	printf("%d\n",f.nbClauses);
 	exportDimacs("2.cnf",&f);
 	freeFormula(&f);
+	freeVec(&I);
 	return 0;
 }
