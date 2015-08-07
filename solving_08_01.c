@@ -83,10 +83,14 @@ int isUnit(Clause c,Interpretation I){
  */
 int statusFormula(Formula f,Interpretation I){
 	int nbSat=0;
-	for (int i = 0; i < f.nbClauses; i++)
+	node * p=f.clauses;
+	while (p!=NULL)
 	{
-		if(isSatisfiedClause(f.clauses[i],I)==TRUE)nbSat++;
-		else if(isSatisfiedClause(f.clauses[i],I)==FALSE)return FALSE;
+		if(isSatisfiedClause(*(p->clause),I)==TRUE)nbSat++;
+		else if(isSatisfiedClause(*(p->clause),I)==FALSE)return FALSE;
+		assert(p!=p->next);
+		p=p->next;	
+
 	}
 	if(nbSat==f.nbClauses)return TRUE;
 	return UNDEF;
@@ -104,9 +108,11 @@ int isUndefFormula(Formula c,Interpretation I){
 	return FALSE;
 }
  void displayFormula(Formula f,Interpretation I){
-	 for (int i = 0; i <f.nbClauses ; i++)
+ 	node * p=f.clauses;
+	 while(p!=NULL)
 	 {
-		 displayClause(f.clauses[i],I);
-		
+		 displayClause(*(p->clause),I);
+		 assert(p!=p->next);
+		p=p->next;	
 	 }
 }
