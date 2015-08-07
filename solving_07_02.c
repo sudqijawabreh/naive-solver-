@@ -53,7 +53,7 @@ int extractWord(FILE *f,char *buffer) {
 
 
 void createFormula(Formula *f,int nbVariables) {
-   f->nbClauses = 0
+   f->nbClauses = 0;
    f->nbVariables = nbVariables;
    f->clauses = NULL; // head of linked list 
    f->literalOccurrences=(Occurrences **) malloc(sizeof(Occurrences*)*nbVariables*2); 
@@ -82,6 +82,7 @@ void freeFormula(Formula *f) {
  // c can't be NULL
 void createClause(Clause ** c) {
 	assert(c!=NULL);
+	*c=(Clause *)malloc(sizeof(Clause));
 	createEmptyVec(DEFAULTSIZE,*c);
   	assert(*c!=NULL);
 }
@@ -92,9 +93,9 @@ void createClause(Clause ** c) {
  * @param clauseNumber (the position)
  * @param Literal l
  */
- // add literal to caluse and caluse to literal occurances list
+ // add literal to clause and clause to literal occurances list
  // c can't be NULL and l can't be zero 
-void addLiteralInClause(Formula f, Cluase * c, Literal l) {
+void addLiteralInClause(Formula f, Clause * c, Literal l) {
 	assert(l!=0);
 	assert(c!=NULL);
   	addLast(c,l);
@@ -102,7 +103,7 @@ void addLiteralInClause(Formula f, Cluase * c, Literal l) {
 }
 
 
-void importDimacs(char * name,Formula * f){
+void importDimacs(char * name,Formula * f){/*
 	FILE * file=NULL;
 	file=fopen(name,"r");
 	if(file==NULL)exit(1);
@@ -122,7 +123,7 @@ void importDimacs(char * name,Formula * f){
 	extractWord(file,word);
 	int nbClauses;
 	str2int(word,&nbClauses);
-	createFormula(f,nbClauses,nbVariables);
+	//createFormula(f,nbClauses,nbVariables);
 	int value=0;
 	
 	for (int i = 0;i<f->nbClauses ; i++)
@@ -141,8 +142,8 @@ void importDimacs(char * name,Formula * f){
 	}
 	
 
-}
-void exportDimacs(char *name,Formula *f){
+*/}
+void exportDimacs(char *name,Formula *f){/*
 		FILE * file=NULL;
 		file=fopen(name,"w");
 		if(file==NULL)exit(1);
@@ -155,33 +156,33 @@ void exportDimacs(char *name,Formula *f){
 		fprintf(file,"\n");
 	}
 	
-}
+*/}
 // malloc n and initilaize  clause,next to NULL
 // n can't be NULL
 void createEmptyNode(node ** n ){
 	*n=(node *)malloc(sizeof(node));
 	assert(*n!=NULL);
-	*(n)->clause=NULL;
-	*(n)->next=NULL;
+	(*n)->clause=NULL;
+	(*n)->next=NULL;
 }
 // creat new Node and assigne clause 
 // c and n  can't be NULL
 void creatNode(node ** n,Clause * c){
 	createEmptyNode(n);
-	*(n)->clause=c;
+	(*n)->clause=c;
 	
 }
-// add caluse to formula and increament # clauses 
-void addClause(Formula f, Clause * c){
+// add clause to formula and increament # clauses 
+void addClause(Formula * f, Clause * c){
 	if(c==NULL)return ;
 	node * n;
 	creatNode(&n,c);
 	assert(n!=NULL);
-	n->next=f.clauses;
-	f.clauses=n;
-	f.nbClauses++;
+	n->next=f->clauses;
+	f->clauses=n;
+	f->nbClauses++;
 
-	assert(f.caluses==n);
+	assert(f->clauses==n);
 
 }
 // addclause to the literal linked list

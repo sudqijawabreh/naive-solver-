@@ -13,13 +13,13 @@
  * @param : the number of literals that contain the clause
 
  */
-void generateClause(Formula f,int clauseNumber, int nbLiterals) {
+void generateClause(Formula f,int clauseNumber, int nbLiterals) {/*
   for(int i = 0;i<nbLiterals;i++) {
     int sign = rand()%2 ? 1 : -1;
     Literal l = sign*(rand()%f.nbVariables+1);
     addLast(&(f.clauses[i]),l);
   }
-}
+*/}
 
 /**
  * Generate and print nbClauses
@@ -27,10 +27,10 @@ void generateClause(Formula f,int clauseNumber, int nbLiterals) {
  * @param 
  */
 
-void generateAllClauses(Formula f) {
+void generateAllClauses(Formula f) {/*
   for(int i = 0;i<f.nbClauses;i++) 
     generateClause(f,i,rand()%f.nbVariables+1);
-}
+*/}
 
 /**
  * Generate a full random formula
@@ -39,12 +39,12 @@ void generateAllClauses(Formula f) {
  * @return the formula
  */
 
-void generateFullRandomFormula(Formula *f,int nbVars,int nbClauses) {
+void generateFullRandomFormula(Formula *f,int nbVars,int nbClauses) {/*
   createFormula(f,nbVars,nbClauses);
   generateAllClauses(*f);
 
 
-}
+*/}
 /**
  * Generate a 3-SAT random formula
  * Each clause have to contain exactly 3 literals

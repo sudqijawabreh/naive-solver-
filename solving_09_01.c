@@ -28,7 +28,7 @@ vecInt* getOccurrences(Formula f, Literal l) {
 	return &f.literalOccurrences[2*(v-1)];
 	if(l<0)
 	return &f.literalOccurrences[2*(v-1)+1];*/
-	return &f.literalOccurrences[literalIdx(l)];
+	//return f.literalOccurrences[literalIdx(l)]);
 	
 }
 
