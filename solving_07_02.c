@@ -57,6 +57,7 @@ void createFormula(Formula *f,int nbVariables) {
    f->nbVariables = nbVariables;
    f->clauses = NULL; // head of linked list 
    f->tail=NULL;
+   printf("%d\n ",nbVariables);
    f->literalOccurrences=(Occurrences **) malloc(sizeof(Occurrences*)*nbVariables*2); 
    
 

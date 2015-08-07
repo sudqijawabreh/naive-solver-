@@ -19,7 +19,7 @@
  * @param : the number of literals that contain the clause
 
  */
-void generateClause(Formula f,int clauseNumber, int nbLiterals, int nbVariablesInFormula);
+void generateClause(Formula* f, int nbLiterals);
 
 /**
  * Generate and print nbClauses
@@ -30,7 +30,7 @@ void generateClause(Formula f,int clauseNumber, int nbLiterals, int nbVariablesI
 
  */
 
-void generateAllClauses(Formula f);
+void generateAllClauses(Formula* f,int nbClauses);
 
 /**
  * Generate a full random formula

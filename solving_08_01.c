@@ -56,7 +56,7 @@ int isUnit(Clause c,Interpretation I){
 /**
  * Display a clause under a given interpretation
  * You can print colors on terminal 
- * see http://www.daniweb.com/software-development/c/threads/266484/how-to-print-text-into-a-different-color-in-terminal
+ * see http://www.daniweb.com/software-development/c/threads/266484/how-to-print-text-into-a-different-color-in-terminal	
  * For example: 
  *  the literal is true in the clause : write in green
  *  the literal is false in the clause : write in red
@@ -70,9 +70,9 @@ int isUnit(Clause c,Interpretation I){
 	for (int i = 0; i <c.size ; i++)
 	{
 		value=getValueLiteral(I,c.datas[i]);
-		if(value==FALSE)printf("\033[22;31m%d,c.datas[i]");
-		if(value==UNDEF)printf("\033[22;34m%d,c.datas[i]");
-		if(value==TRUE)printf("\033[22;32m %d,c.datas[i]");
+		if(value==FALSE)printf("\033[22;31m%d ",c.datas[i]);
+		if(value==UNDEF)printf("\033[22;34m%d ",c.datas[i]);
+		if(value==TRUE)printf("\033[22;32m %d ",c.datas[i]);
 	}
 	printf("\n");
 }
